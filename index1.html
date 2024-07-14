@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">BMI Calculator</h1>
+        Your height (cm) :
+        <input type="number" class="height" id="height" value="180" placeholder="Input your height in cm">
+        Your weight (cm) :
+        <input type="number" class="weight" id="weight" value="100" placeholder="Inpur your weight in kg">
+        <button class="btn" id="btn">Compute</button>
+        <input type="text" id="bmi-result" disabled>
+        <p class="info-text">Weight condition : <span id="weight-condition"></span></p>
+    </div>
+
+    <script>
+        const btnEl = document.getElementById("btn");
+        const bmiResultEl = document.getElementById("bmi-result");
+        const weightConditionEl = document.getElementById("weight-condition");
+
+        function calculateBMI(){
+            const heightEl = document.getElementById("height").value / 100;
+            const weightEl = document.getElementById("weight").value;
+            const bmi = weightEl / (heightEl * heightEl);
+            bmiResultEl.value = bmi.toFixed(3);
+
+            if(bmi < 18.5){
+                weightConditionEl.innerText = "Underweight";
+            }else if(bmi >=18.5 && bmi <= 24.9){
+                weightConditionEl.innerText = "Normal weight";
+            }else if(bmi > 25 && bmi <=29.9){
+                weightConditionEl.innerHTML = "Over weight";
+            }else{
+                weightConditionEl.innerHTML = "Obese";
+            }
+        }
+
+        btnEl.addEventListener("click",calculateBMI);
+    </script>
+</body>
+</html>
